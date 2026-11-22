@@ -66,7 +66,12 @@ function LoginContent() {
         }),
       });
 
-      const data = await res.json();
+      let data: any = {};
+      try {
+        data = await res.json();
+      } catch {
+        data = { message: `Server error (${res.status})` };
+      }
 
       if (res.ok && data.user) {
         showToast(data.message || 'Login successful!', 'success');
@@ -84,8 +89,9 @@ function LoginContent() {
       } else {
         setErrorMessage(data.message || 'Invalid username or password.');
       }
-    } catch {
-      setErrorMessage('Network connection error. Please try again.');
+    } catch (err) {
+      console.error('Login error:', err);
+      setErrorMessage('Network connection error. Please refresh the page and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -106,8 +112,8 @@ function LoginContent() {
       return;
     }
 
-    if (!regPassword || regPassword.length < 4) {
-      setErrorMessage('Password must be at least 4 characters.');
+    if (!regPassword || regPassword.length < 6) {
+      setErrorMessage('Password must be at least 6 characters.');
       return;
     }
 
@@ -124,7 +130,12 @@ function LoginContent() {
         }),
       });
 
-      const data = await res.json();
+      let data: any = {};
+      try {
+        data = await res.json();
+      } catch {
+        data = { message: `Server error (${res.status})` };
+      }
 
       if (res.ok && data.user) {
         showToast('Welcome to Nila’s Treat!', 'success');
@@ -139,8 +150,9 @@ function LoginContent() {
       } else {
         setErrorMessage(data.message || 'Registration failed. Please try again.');
       }
-    } catch {
-      setErrorMessage('Network connection error. Please try again.');
+    } catch (err) {
+      console.error('Registration error:', err);
+      setErrorMessage('Network connection error. Please refresh the page and try again.');
     } finally {
       setIsSubmitting(false);
     }
