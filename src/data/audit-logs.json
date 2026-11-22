@@ -1,0 +1,42 @@
+[
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:2018:2275:79c0:252d:47ed:6581",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "id": "aud-1794536279545-b6rj6",
+    "created_at": "2026-11-13T02:17:59.545Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:2018:2275:79c0:252d:47ed:6581",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "id": "aud-1794536202098-44lc0",
+    "created_at": "2026-11-13T02:16:42.098Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:2018:2275:79c0:252d:47ed:6581",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "id": "aud-1794536152059-y4lux",
+    "created_at": "2026-11-13T02:15:52.059Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:2003:e6a9:5441:9c2d:60fd:e1d0",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "id": "aud-1794502170641-wgfm4",
+    "created_at": "2026-11-12T16:49:30.641Z"
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "id": "sess-51611110-792b-4644-a603-8b4e6716980c",
+    "subject_id": "usr-1794037156658",
+    "subject_role": "customer",
+    "mfa_verified": true,
+    "ip_address": "2409:40f4:2018:2275:79c0:252d:47ed:6581",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "revoked_at": null,
+    "expires_at": "2026-11-20T02:18:45.276Z",
+    "created_at": "2026-11-13T02:18:45.279Z"
+  },
+  {
+    "id": "sess-9c3991c2-0bbc-47bf-9661-7350cd546188",
+    "subject_id": "usr-admin-1",
+    "subject_role": "admin",
+    "mfa_verified": true,
+    "ip_address": "2409:40f4:2018:2275:79c0:252d:47ed:6581",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "revoked_at": "2026-11-13T02:18:27.005Z",
+    "expires_at": "2026-11-20T02:17:59.532Z",
+    "created_at": "2026-11-13T02:17:59.534Z"
+  },
+  {
+    "id": "sess-da49f46e-74e9-4097-bfd1-453a23fbef42",
+    "subject_id": "usr-1794037156658",
+    "subject_role": "customer",
+    "mfa_verified": true,
+    "ip_address": "2409:40f4:2018:2275:79c0:252d:47ed:6581",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "revoked_at": null,
+    "expires_at": "2026-11-20T02:17:55.062Z",
+    "created_at": "2026-11-13T02:17:55.064Z"
+  },
+  {
+    "id": "sess-4929d2ae-fffa-4b62-86e8-3e8bd8c0214a",
+    "subject_id": "usr-admin-1",
+    "subject_role": "admin",
+    "mfa_verified": true,
+    "ip_address": "2409:40f4:2018:2275:79c0:252d:47ed:6581",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "revoked_at": "2026-11-13T02:17:37.060Z",
+    "expires_at": "2026-11-20T02:16:42.081Z",
+    "created_at": "2026-11-13T02:16:42.082Z"
+  },
+  {
+    "id": "sess-65ce7b90-fa63-424b-9c6f-5d9bcbcc6691",
+    "subject_id": "usr-1794037156658",
+    "subject_role": "customer",
+    "mfa_verified": true,
+    "ip_address": "2409:40f4:2018:2275:79c0:252d:47ed:6581",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "revoked_at": null,
+    "expires_at": "2026-11-20T02:16:39.238Z",
+    "created_at": "2026-11-13T02:16:39.240Z"
+  },
+  {
+    "id": "sess-84647fa7-ceff-40c8-a1f9-e0c22f65a767",
+    "subject_id": "usr-admin-1",
+    "subject_role": "admin",
+    "mfa_verified": true,
+    "ip_address": "2409:40f4:2018:2275:79c0:252d:47ed:6581",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "revoked_at": "2026-11-13T02:16:17.460Z",
+    "expires_at": "2026-11-20T02:15:52.049Z",
+    "created_at": "2026-11-13T02:15:52.051Z"
+  },
+  {
+    "id": "sess-4ea3bd67-8b99-4abb-8298-27e66547a628",
+    "subject_id": "usr-1794037156658",
+    "subject_role": "customer",
+    "mfa_verified": true,
+    "ip_address": "2409:40f4:2018:2275:79c0:252d:47ed:6581",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "revoked_at": null,
+    "expires_at": "2026-11-20T02:13:36.117Z",
+    "created_at": "2026-11-13T02:13:36.119Z"
+  },
+  {
+    "id": "sess-59fcf268-dc38-4bc3-b569-bd58a2333d7a",
+    "subject_id": "usr-1794037156658",
+    "subject_role": "customer",
+    "mfa_verified": true,
+    "ip_address": "2409:40f4:2003:e6a9:5441:9c2d:60fd:e1d0",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "revoked_at": null,
+    "expires_at": "2026-11-19T17:16:08.629Z",
+    "created_at": "2026-11-12T17:16:08.633Z"
+  },
+  {
+    "id": "sess-e70148f5-3af3-40ce-99c2-cd9e51ae613c",
+    "subject_id": "usr-admin-1",
+    "subject_role": "admin",
+    "mfa_verified": true,
+    "ip_address": "2409:40f4:2003:e6a9:5441:9c2d:60fd:e1d0",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "revoked_at": "2026-11-12T17:15:53.563Z",
+    "expires_at": "2026-11-19T16:49:30.629Z",
+    "created_at": "2026-11-12T16:49:30.631Z"
+  },
+  {
+    "id": "sess-e725bf0a-4adf-47bb-bd0b-60d7d7a9fdd4",
+    "subject_id": "usr-1794037156658",
+    "subject_role": "customer",
+    "mfa_verified": true,
+    "ip_address": "2409:40f4:2003:e6a9:5441:9c2d:60fd:e1d0",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+    "revoked_at": null,
+    "expires_at": "2026-11-19T16:48:55.309Z",
+    "created_at": "2026-11-12T16:48:55.312Z"
+  }
+]

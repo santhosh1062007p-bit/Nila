@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #990F35;
+  --primary-hover: #800A2A;
+  --primary-light: #FCE8ED;
+  --text-burgundy: #70132C;
+  --text-muted: #8C485A;
+  --bg-warm: #FFFDFB;
+  --bg-card: #FFFFFF;
+  --border-pink: #F5D3DC;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --color-primary: #990F35;
+  --color-primary-hover: #800A2A;
+  --color-accent: #FCE8ED;
+  --color-text-burgundy: #70132C;
+  --color-text-muted: #8C485A;
+  --color-background-warm: #FFFDFB;
+  --color-border-pink: #F5D3DC;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-warm);
+  color: var(--text-burgundy);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar for bakery aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFFDFB;
+}
+::-webkit-scrollbar-thumb {
+  background: #E8B4C0;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #990F35;
+}
+
+/* Smooth bakery card elevation */
+.bakery-card {
+  background: #FFFFFF;
+  border: 1px solid #F5D3DC;
+  border-radius: 1.25rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bakery-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -6px rgba(153, 15, 53, 0.12);
+  border-color: #E8B4C0;
+}
+
+/* Completely hide Next.js development badges & indicators */
+nextjs-portal,
+#nextjs-dev-indicator,
+[data-nextjs-dev-indicator],
+[data-nextjs-toast-wrapper],
+[data-nextjs-dialog-overlay],
+div[class*="nextjs-dev-indicator"] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
 }

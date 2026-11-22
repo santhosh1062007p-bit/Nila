@@ -1,0 +1,42 @@
+[
+  {
+    "id": "usr-customer-1",
+    "full_name": "Priya Sundar",
+    "email": "priya@example.com",
+    "phone": "9876543210",
+    "role": "customer",
+    "is_active": true,
+    "created_at": "2026-11-07T07:37:10.992Z",
+    "password": "customer123"
+  },
+  {
+    "id": "usr-1794037044963",
+    "full_name": "Anand Kumar",
+    "phone": "9442112233",
+    "email": null,
+    "role": "customer",
+    "is_active": true,
+    "created_at": "2026-11-07T07:37:24.963Z",
+    "password": "MyCake@123"
+  },
+  {
+    "id": "usr-1794037156658",
+    "full_name": "santhosh",
+    "phone": "1234567890",
+    "email": null,
+    "role": "customer",
+    "is_active": true,
+    "created_at": "2026-11-07T07:39:16.658Z",
+    "password_hash": "$argon2id$v=19$m=19456,t=2,p=1$GGaYOlGMLi2o/wNNKNPz3w$YDIXk4ZII4Wu8o4rC0D7gD9si4GtcYFKhMsM/beo4/I"
+  },
+  {
+    "id": "usr-1794041121752",
+    "full_name": "Tamil",
+    "phone": "5434664564",
+    "email": null,
+    "role": "customer",
+    "is_active": true,
+    "created_at": "2026-11-07T08:45:21.752Z",
+    "password": "tamil12"
+  }
+]
