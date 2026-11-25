@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { CartItem, Product, FulfilmentType, DeliveryZone, Coupon } from '@/types';
+import { INITIAL_PRODUCTS } from '@/data/initial-data';
 import { useToast } from './ToastContext';
 import { useRealtimeSubscription, useRealtimeBroadcast } from './RealtimeContext';
 
@@ -18,6 +19,7 @@ interface CartContextType {
   items: CartItem[];
   addItem: (params: AddItemParams) => void;
   updateQuantity: (itemId: string, quantity: number) => void;
+  updateItemWeight: (itemId: string, newWeight: 0.5 | 1.0) => void;
   removeItem: (itemId: string) => void;
   clearCart: () => void;
   isCartOpen: boolean;
@@ -383,6 +385,35 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  const updateItemWeight = (itemId: string, newWeight: 0.5 | 1.0) => {
+    setItems((prev) =>
+      prev.map((item) => {
+        if (item.id !== itemId || item.weight_kg === newWeight) return item;
+        const prod = INITIAL_PRODUCTS.find((p) => p.id === item.product_id);
+        const variant = prod?.variants.find((v) => v.weight_kg === newWeight);
+        const newBasePrice = variant
+          ? variant.price_paise
+          : newWeight === 1.0
+          ? Math.round(item.base_price_paise * 1.75)
+          : Math.round(item.base_price_paise / 1.75);
+
+        const newUnitPrice = newBasePrice + (item.eggless ? item.eggless_charge_paise : 0);
+        const cleanMessage = item.custom_message?.trim() || '';
+        const newId = `${item.product_id}-${newWeight}-${item.eggless ? 'eggless' : 'regular'}-${cleanMessage}`;
+
+        return {
+          ...item,
+          id: newId,
+          weight_kg: newWeight,
+          base_price_paise: newBasePrice,
+          unit_price_paise: newUnitPrice,
+          line_total_paise: newUnitPrice * item.quantity,
+        };
+      })
+    );
+    showToast(`Updated weight to ${newWeight} Kg`, 'info');
+  };
+
   const removeItem = (itemId: string) => {
     setItems((prev) => prev.filter((item) => item.id !== itemId));
     showToast('Item removed from cart', 'info');
@@ -488,6 +519,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         items,
         addItem,
         updateQuantity,
+        updateItemWeight,
         removeItem,
         clearCart,
         isCartOpen,

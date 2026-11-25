@@ -22,6 +22,7 @@ export default function CartPage() {
   const {
     items,
     updateQuantity,
+    updateItemWeight,
     removeItem,
     clearCart,
     fulfilmentType,
@@ -130,16 +131,38 @@ export default function CartPage() {
                     <h3 className="font-serif font-bold text-lg text-[#990F35]">
                       {item.product_name}
                     </h3>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="text-xs font-bold px-2 py-0.5 rounded bg-[#FCE8ED] text-[#70132C]">
-                        {item.weight_kg} Kg
-                      </span>
+                    <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                      <div className="inline-flex items-center bg-[#FFF6F0] p-0.5 rounded-lg border border-[#F5D3DC]">
+                        <button
+                          type="button"
+                          onClick={() => updateItemWeight(item.id, 0.5)}
+                          className={`px-2 py-0.5 text-[10px] font-bold rounded transition-colors ${
+                            item.weight_kg === 0.5
+                              ? 'bg-[#8F1237] text-white shadow-xs'
+                              : 'text-[#70132C] hover:bg-[#FCE8ED]'
+                          }`}
+                        >
+                          ½ Kg
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => updateItemWeight(item.id, 1.0)}
+                          className={`px-2 py-0.5 text-[10px] font-bold rounded transition-colors ${
+                            item.weight_kg === 1.0
+                              ? 'bg-[#8F1237] text-white shadow-xs'
+                              : 'text-[#70132C] hover:bg-[#FCE8ED]'
+                          }`}
+                        >
+                          1 Kg
+                        </button>
+                      </div>
+
                       {item.eggless ? (
-                        <span className="text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">
                           Eggless (+₹200)
                         </span>
                       ) : (
-                        <span className="text-xs font-medium px-2 py-0.5 rounded bg-stone-100 text-stone-600">
+                        <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-stone-100 text-stone-600">
                           Regular
                         </span>
                       )}

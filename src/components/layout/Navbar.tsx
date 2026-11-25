@@ -4,10 +4,12 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { ShoppingBag, Search, User as UserIcon } from 'lucide-react';
+import { ShoppingBag, Search, User as UserIcon, ArrowRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { formatINR } from '@/lib/utils';
+import { INITIAL_PRODUCTS } from '@/data/initial-data';
+import CakeImage from '@/components/products/CakeImage';
 
 function getInitials(name?: string | null): string {
   if (!name) return '';
@@ -22,9 +24,19 @@ export default function Navbar() {
   const { totalItemsCount, subtotalPaise, setIsCartOpen } = useCart();
   const { user, isLoading } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  const previewResults = searchQuery.trim()
+    ? INITIAL_PRODUCTS.filter(
+        (p) =>
+          p.name.toLowerCase().includes(searchQuery.toLowerCase().trim()) ||
+          p.category_name?.toLowerCase().includes(searchQuery.toLowerCase().trim())
+      ).slice(0, 5)
+    : [];
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSearchFocused(false);
     if (searchQuery.trim()) {
       router.push(`/cakes?search=${encodeURIComponent(searchQuery.trim())}`);
     } else {
@@ -59,20 +71,81 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Search Bar */}
-          <form
-            onSubmit={handleSearchSubmit}
-            className="order-3 w-full md:order-none md:flex-1 md:max-w-xl lg:max-w-2xl flex items-center relative"
-          >
-            <input
-              type="text"
-              placeholder="Search cakes..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#FFFDFB] pl-10 pr-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm border border-[#F5D3DC] focus:outline-none focus:border-[#8F1237] focus:ring-1 focus:ring-[#8F1237] text-[#33252A] placeholder:text-[#70132C]/50"
-            />
-            <Search className="w-4 h-4 text-[#70132C]/60 absolute left-3.5 top-2.5 sm:top-3" />
-          </form>
+          {/* Instant Search Bar with Live Preview */}
+          <div className="order-3 w-full md:order-none md:flex-1 md:max-w-xl lg:max-w-2xl relative">
+            <form onSubmit={handleSearchSubmit} className="flex items-center relative">
+              <input
+                type="text"
+                placeholder="Search freshly baked cakes (e.g. Pista, Truffle, Kunafa)..."
+                value={searchQuery}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-[#FFFDFB] pl-10 pr-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm border border-[#F5D3DC] focus:outline-none focus:border-[#8F1237] focus:ring-1 focus:ring-[#8F1237] text-[#33252A] placeholder:text-[#70132C]/50"
+              />
+              <Search className="w-4 h-4 text-[#70132C]/60 absolute left-3.5 top-2.5 sm:top-3" />
+            </form>
+
+            {/* Instant Floating Preview Dropdown */}
+            {isSearchFocused && searchQuery.trim().length > 0 && (
+              <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-2xl border border-[#F5D3DC] shadow-2xl p-2 z-50 divide-y divide-[#F5D3DC]/60 max-h-96 overflow-y-auto">
+                {previewResults.length === 0 ? (
+                  <div className="p-4 text-center text-xs text-stone-500">
+                    No cakes found matching &ldquo;{searchQuery}&rdquo;.
+                  </div>
+                ) : (
+                  <>
+                    <div className="px-3 py-1.5 text-[10px] font-bold text-[#8C485A] uppercase tracking-wider">
+                      Matching Cakes ({previewResults.length})
+                    </div>
+                    {previewResults.map((p) => (
+                      <button
+                        key={p.id}
+                        type="button"
+                        onClick={() => {
+                          setSearchQuery(p.name);
+                          setIsSearchFocused(false);
+                          router.push(`/cakes?search=${encodeURIComponent(p.name)}`);
+                        }}
+                        className="w-full flex items-center gap-3 p-2 hover:bg-[#FFF6F0] rounded-xl text-left transition-colors group cursor-pointer"
+                      >
+                        <div className="relative w-11 h-11 rounded-lg overflow-hidden shrink-0 border border-[#F5D3DC]">
+                          <CakeImage src={p.image_url} alt={p.name} fill className="object-cover" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-bold text-xs text-[#70132C] group-hover:text-[#8F1237] truncate">
+                              {p.name}
+                            </span>
+                            {p.is_eggless_available && (
+                              <span className="w-2 h-2 rounded-full bg-emerald-600 inline-block shrink-0" title="Eggless Available" />
+                            )}
+                          </div>
+                          <span className="text-[10px] text-stone-500 block truncate">
+                            {p.category_name}
+                          </span>
+                        </div>
+                        <span className="text-xs font-bold text-[#8F1237] shrink-0">
+                          From {formatINR(p.variants[0]?.price_paise || 30000)}
+                        </span>
+                      </button>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsSearchFocused(false);
+                        router.push(`/cakes?search=${encodeURIComponent(searchQuery.trim())}`);
+                      }}
+                      className="w-full py-2 text-center text-xs font-bold text-[#8F1237] hover:underline flex items-center justify-center gap-1 pt-2.5 cursor-pointer"
+                    >
+                      <span>View all results for &ldquo;{searchQuery}&rdquo;</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
 
           {/* Right: Cart & Profile Avatar / Sign In */}
           <div className="flex items-center gap-2.5 sm:gap-3.5 shrink-0">

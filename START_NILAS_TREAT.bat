@@ -15,9 +15,9 @@ timeout /t 4 /nobreak >nul
 
 echo [3/3] Starting Public Cloudflare Live Tunnel...
 if exist "%~dp0..\cloudflared.exe" (
-    start "Cloudflare Live Tunnel" cmd /k ""%~dp0..\cloudflared.exe" tunnel --url http://localhost:3000"
+    start "Cloudflare Live Tunnel" cmd /k ""%~dp0..\cloudflared.exe" tunnel --protocol http2 --url http://localhost:3000"
 ) else if exist "cloudflared.exe" (
-    start "Cloudflare Live Tunnel" cmd /k "cloudflared.exe tunnel --url http://localhost:3000"
+    start "Cloudflare Live Tunnel" cmd /k "cloudflared.exe tunnel --protocol http2 --url http://localhost:3000"
 ) else (
     echo Cloudflared executable not found.
 )

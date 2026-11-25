@@ -49,3 +49,8 @@ next-env.d.ts
 !/public/uploads/avatars/.gitkeep
 /public/uploads/cakes/*
 !/public/uploads/cakes/.gitkeep
+
+# backups & local logs
+backups/
+*.log
+

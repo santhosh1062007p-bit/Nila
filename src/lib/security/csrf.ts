@@ -18,10 +18,20 @@ export function verifySameOriginCsrf(req: NextRequest): NextResponse | null {
       const originHost = new URL(origin).host.toLowerCase();
       const expectedHost = host.toLowerCase();
       if (originHost !== expectedHost) {
-        return NextResponse.json(
-          { message: 'CSRF validation failed: cross-origin request rejected.' },
-          { status: 403 }
-        );
+        // Permit legitimate tunnel domains and local dev proxies
+        const isTunnelOrDev =
+          originHost.endsWith('.trycloudflare.com') ||
+          originHost.includes('localhost') ||
+          originHost.includes('127.0.0.1') ||
+          expectedHost.includes('localhost') ||
+          expectedHost.includes('127.0.0.1');
+
+        if (!isTunnelOrDev) {
+          return NextResponse.json(
+            { message: 'CSRF validation failed: cross-origin request rejected.' },
+            { status: 403 }
+          );
+        }
       }
     } catch {
       return NextResponse.json(
@@ -39,9 +49,9 @@ export function buildSecurityHeaders(isProd: boolean): Record<string, string> {
     "default-src 'self'",
     "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://api.razorpay.com",
     "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob: https://images.unsplash.com https://res.cloudinary.com https://*.r2.dev https://*.amazonaws.com",
+    "img-src 'self' data: blob: https://images.unsplash.com https://res.cloudinary.com https://*.r2.dev https://*.amazonaws.com https://*.tile.openstreetmap.org https://tile.openstreetmap.org",
     "font-src 'self' data:",
-    "connect-src 'self' https://api.razorpay.com https://lumberjack.razorpay.com https://checkout.razorpay.com",
+    "connect-src 'self' https://api.razorpay.com https://lumberjack.razorpay.com https://checkout.razorpay.com https://*.tile.openstreetmap.org https://tile.openstreetmap.org",
     "frame-src https://api.razorpay.com https://checkout.razorpay.com",
     "object-src 'none'",
     "base-uri 'self'",
@@ -54,7 +64,7 @@ export function buildSecurityHeaders(isProd: boolean): Record<string, string> {
     'X-Content-Type-Options': 'nosniff',
     'X-Frame-Options': 'DENY',
     'Referrer-Policy': 'strict-origin-when-cross-origin',
-    'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+    'Permissions-Policy': 'camera=(), microphone=(), geolocation=(self)',
     'X-DNS-Prefetch-Control': 'on',
   };
 

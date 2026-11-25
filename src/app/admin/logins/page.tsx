@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   Eye,
   X,
+  Lock,
 } from 'lucide-react';
 import { CustomerLoginRecord } from '@/types';
 import { formatINR } from '@/lib/utils';
@@ -264,7 +265,8 @@ export default function AdminCustomerLoginsPage() {
 
           <div className="text-xs text-[#8C485A] bg-white px-3.5 py-2 rounded-xl border border-[#F5D3DC] shrink-0 space-y-0.5">
             <div className="font-bold text-[#70132C] flex items-center gap-1.5">
-              <span>🔒 Master Admin Credentials</span>
+              <Lock className="w-3.5 h-3.5 text-[#8F1237]" />
+              <span>Master Admin Credentials</span>
             </div>
             <p className="text-[11px] text-[#8C485A]">
               View only. Cannot be used for customer orders or customer registration.

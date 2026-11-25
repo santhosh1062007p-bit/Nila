@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ShoppingBag, Sparkles, Check, Info, Zap } from 'lucide-react';
+import { ShoppingBag, Sparkles, Check, Info } from 'lucide-react';
 import { Product } from '@/types';
 import { formatINR } from '@/lib/utils';
 import { useCart } from '@/context/CartContext';
@@ -196,7 +196,6 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="py-2 px-2 sm:px-3 rounded-xl text-xs font-black bg-[#FB641B] hover:bg-[#e05510] text-white shadow-xs flex items-center justify-center gap-1.5 transition-all active:scale-95"
             aria-label={`Buy ${product.name} now`}
           >
-            <Zap className="w-3.5 h-3.5 fill-current shrink-0" />
             <span className="truncate">BUY NOW</span>
           </button>
         </div>

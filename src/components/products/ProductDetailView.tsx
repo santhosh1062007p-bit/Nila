@@ -10,7 +10,6 @@ import {
   ShieldCheck,
   Share2,
   Check,
-  Zap,
 } from 'lucide-react';
 import { Product } from '@/types';
 import { formatINR, getAvailableDates, AVAILABLE_TIME_SLOTS } from '@/lib/utils';
@@ -280,10 +279,10 @@ export default function ProductDetailView({ product: initialProduct }: ProductDe
           </label>
           <div className="flex flex-wrap gap-2 text-xs font-semibold">
             {[
-              { label: '🎂 Birthday', text: 'Happy Birthday!' },
-              { label: '💍 Anniversary', text: 'Happy Anniversary!' },
-              { label: '🎉 Celebration', text: 'Congratulations!' },
-              { label: '💖 Special Love', text: 'With All My Love' },
+              { label: 'Birthday', text: 'Happy Birthday!' },
+              { label: 'Anniversary', text: 'Happy Anniversary!' },
+              { label: 'Celebration', text: 'Congratulations!' },
+              { label: 'Special Love', text: 'With All My Love' },
             ].map((occ) => (
               <button
                 key={occ.label}
@@ -447,7 +446,6 @@ export default function ProductDetailView({ product: initialProduct }: ProductDe
             onClick={handleBuyNow}
             className="flex-1 py-3.5 px-6 rounded-2xl font-black text-sm bg-[#FB641B] hover:bg-[#e05510] text-white shadow-md transition-all active:scale-98 flex items-center justify-center gap-2"
           >
-            <Zap className="w-4 h-4 fill-current" />
             <span>BUY NOW</span>
           </button>
         </div>

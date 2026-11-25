@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Image from 'next/image';
-import { Sparkles, Heart, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Sparkles, Heart, CheckCircle2, ArrowRight, Cake } from 'lucide-react';
 import { triggerBirthdayCelebration, triggerOrderSuccessConfetti } from '@/lib/animations/confetti';
 
 interface CelebrationModalProps {
@@ -45,9 +45,9 @@ export default function CelebrationModal({
         <div className="relative flex justify-center items-center">
           {detectBirthday ? (
             <div className="relative">
-              {/* Animated Glowing Birthday Cake Emoji/Illustration */}
-              <div className="w-24 h-24 rounded-full bg-[#FFF6F0] border-2 border-[#8F1237]/20 flex items-center justify-center text-5xl shadow-lg animate-bounce">
-                🎂
+              {/* Animated Glowing Birthday Cake Illustration */}
+              <div className="w-24 h-24 rounded-full bg-[#FFF6F0] border-2 border-[#8F1237]/20 flex items-center justify-center text-[#8F1237] shadow-lg animate-bounce">
+                <Cake className="w-12 h-12 text-[#8F1237]" />
               </div>
               <div className="absolute -top-2 -right-2 px-2.5 py-1 bg-[#8F1237] text-white rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm flex items-center gap-1">
                 <Sparkles className="w-3 h-3 text-amber-300" />
@@ -75,7 +75,7 @@ export default function CelebrationModal({
 
           <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#33252A] leading-tight">
             {detectBirthday
-              ? `🎉 Happy Birthday Celebration!`
+              ? `Happy Birthday Celebration!`
               : `Baking Fresh for Your Moments!`}
           </h2>
 

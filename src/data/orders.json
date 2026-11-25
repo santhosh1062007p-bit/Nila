@@ -6,7 +6,7 @@
     "customer_phone": "1234567890",
     "customer_email": "santhosh1007p@gmail.com",
     "fulfilment_type": "delivery",
-    "order_status": "Delivered",
+    "order_status": "Baking in Progress",
     "payment_method": "cod",
     "payment_status": "paid",
     "subtotal_paise": 60000,
@@ -45,7 +45,19 @@
     "id": "ord-1794040302311",
     "order_number": 1002,
     "created_at": "2026-11-07T08:31:42.311Z",
-    "updated_at": "2026-11-07T08:33:57.069Z"
+    "updated_at": "2026-11-22T15:40:21.830Z",
+    "status_history": [
+      {
+        "id": "osh-1795362021830-yy4x",
+        "order_id": "ord-1794040302311",
+        "from_status": "Delivered",
+        "to_status": "Baking in Progress",
+        "changed_by_id": "usr-admin-1",
+        "changed_by_role": "admin",
+        "note": null,
+        "created_at": "2026-11-22T15:40:21.830Z"
+      }
+    ]
   },
   {
     "id": "ord-seed-1",
@@ -56,7 +68,7 @@
     "customer_phone": "9876543210",
     "customer_email": "priya@example.com",
     "fulfilment_type": "delivery",
-    "order_status": "Baking in Progress",
+    "order_status": "Cancelled",
     "payment_method": "razorpay",
     "payment_status": "paid",
     "subtotal_paise": 80000,
@@ -93,6 +105,18 @@
       }
     ],
     "created_at": "2026-11-07T07:02:10.992Z",
-    "updated_at": "2026-11-07T07:37:10.992Z"
+    "updated_at": "2026-11-22T15:40:22.229Z",
+    "status_history": [
+      {
+        "id": "osh-1795362022229-5zjx",
+        "order_id": "ord-seed-1",
+        "from_status": "Baking in Progress",
+        "to_status": "Cancelled",
+        "changed_by_id": "usr-admin-1",
+        "changed_by_role": "admin",
+        "note": null,
+        "created_at": "2026-11-22T15:40:22.229Z"
+      }
+    ]
   }
 ]

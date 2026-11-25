@@ -15,6 +15,8 @@ import {
   Category,
   Coupon,
   CustomerLoginRecord,
+  DeliveryPartner,
+  DeliveryLocationUpdate,
   DeliveryZone,
   GenderOption,
   NotificationPreferences,
@@ -24,6 +26,7 @@ import {
   PaymentStatus,
   PaymentTransactionStatus,
   Product,
+  Review,
   SessionRecord,
   StoreSettings,
   User,
@@ -719,5 +722,148 @@ export const db = {
         (l) => l.user_id !== 'usr-admin-1' && l.phone !== adminPhone && l.email !== adminEmail
       )
       .sort((a, b) => new Date(b.login_time).getTime() - new Date(a.login_time).getTime());
+  },
+
+  // DELIVERY PARTNERS & LIVE GPS TRACKING
+  async getDeliveryPartners(): Promise<DeliveryPartner[]> {
+    return devStore.getState().deliveryPartners || [];
+  },
+
+  async getDeliveryPartnerById(id: string): Promise<DeliveryPartner | null> {
+    const list = devStore.getState().deliveryPartners || [];
+    return list.find((p) => p.id === id) || null;
+  },
+
+  async getDeliveryPartnerByPhone(phone: string): Promise<DeliveryPartner | null> {
+    const clean = phone.replace(/[^0-9]/g, '');
+    const list = devStore.getState().deliveryPartners || [];
+    return list.find((p) => p.phone.replace(/[^0-9]/g, '') === clean) || null;
+  },
+
+  async saveDeliveryPartner(partner: DeliveryPartner): Promise<DeliveryPartner> {
+    const state = devStore.getState();
+    const list = state.deliveryPartners || [];
+    const idx = list.findIndex((p) => p.id === partner.id);
+    if (idx !== -1) {
+      list[idx] = { ...list[idx], ...partner };
+    } else {
+      list.push(partner);
+    }
+    state.deliveryPartners = list;
+    devStore.persistDeliveryPartners(list);
+    broadcastSyncEvent('DELIVERY_PARTNER_UPDATED', partner);
+    return partner;
+  },
+
+  async assignDeliveryPartner(orderId: string, partnerId: string, assignedBy = 'admin'): Promise<Order | null> {
+    const order = await this.getOrderById(orderId);
+    if (!order) return null;
+    const partner = await this.getDeliveryPartnerById(partnerId);
+    if (!partner) return null;
+
+    const previousStatus = order.order_status;
+    order.delivery_partner_id = partner.id;
+    order.delivery_partner = partner;
+    order.order_status = 'Delivery Partner Assigned';
+    order.updated_at = new Date().toISOString();
+
+    if (!order.status_history) order.status_history = [];
+    order.status_history.push({
+      id: `osh-${Date.now()}`,
+      order_id: order.id,
+      from_status: previousStatus,
+      to_status: 'Delivery Partner Assigned',
+      changed_by_id: assignedBy,
+      changed_by_role: 'admin',
+      note: `Delivery assigned to ${partner.name} (${partner.phone})`,
+      created_at: new Date().toISOString(),
+    });
+
+    const state = devStore.getState();
+    const idx = state.orders.findIndex((o) => o.id === order.id);
+    if (idx !== -1) state.orders[idx] = order;
+    devStore.persistOrders(state.orders);
+
+    broadcastSyncEvent('ORDER_STATUS_CHANGED', order);
+    broadcastSyncEvent('DELIVERY_PARTNER_ASSIGNED', { order_id: order.id, partner });
+    return order;
+  },
+
+  async updateDeliveryLocation(
+    orderId: string,
+    partnerId: string,
+    loc: {
+      lat: number;
+      lng: number;
+      accuracy?: number | null;
+      speed?: number | null;
+      heading?: number | null;
+      distance_remaining_km?: number | null;
+      eta_minutes?: number | null;
+    }
+  ): Promise<Order | null> {
+    const order = await this.getOrderById(orderId);
+    if (!order) return null;
+
+    const partner = await this.getDeliveryPartnerById(partnerId);
+    if (partner) {
+      partner.current_lat = loc.lat;
+      partner.current_lng = loc.lng;
+      partner.last_location_updated_at = new Date().toISOString();
+      await this.saveDeliveryPartner(partner);
+    }
+
+    const update: DeliveryLocationUpdate = {
+      order_id: order.id,
+      partner_id: partnerId,
+      lat: loc.lat,
+      lng: loc.lng,
+      accuracy: loc.accuracy ?? null,
+      speed: loc.speed ?? null,
+      heading: loc.heading ?? null,
+      distance_remaining_km: loc.distance_remaining_km ?? null,
+      eta_minutes: loc.eta_minutes ?? null,
+      timestamp: new Date().toISOString(),
+    };
+
+    order.live_delivery_location = update;
+    order.updated_at = new Date().toISOString();
+
+    const state = devStore.getState();
+    const idx = state.orders.findIndex((o) => o.id === order.id);
+    if (idx !== -1) state.orders[idx] = order;
+    devStore.persistOrders(state.orders);
+
+    broadcastSyncEvent('DELIVERY_LOCATION_UPDATE', update);
+    return order;
+  },
+
+  async getAssignedOrdersForPartner(partnerId: string): Promise<Order[]> {
+    const orders = await this.getOrders();
+    return orders.filter(
+      (o) =>
+        o.delivery_partner_id === partnerId &&
+        o.order_status !== 'Delivered' &&
+        o.order_status !== 'Cancelled' &&
+        o.order_status !== 'Rejected'
+    );
+  },
+
+  async getReviews(productId?: string): Promise<Review[]> {
+    const state = devStore.getState();
+    const reviews = state.reviews || [];
+    if (productId) {
+      return reviews.filter((r) => r.product_id === productId);
+    }
+    return reviews;
+  },
+
+  async saveReview(review: Review): Promise<Review> {
+    const state = devStore.getState();
+    state.reviews = state.reviews || [];
+    state.reviews.unshift(review);
+    devStore.persistReviews(state.reviews);
+    broadcastSyncEvent('REVIEW_CREATED', review);
+    return review;
   },
 };

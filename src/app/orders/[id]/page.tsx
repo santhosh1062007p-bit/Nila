@@ -12,6 +12,7 @@ import {
   Sparkles,
   ShieldCheck,
   AlertCircle,
+  Cake,
 } from 'lucide-react';
 import { db } from '@/lib/db';
 import { getCurrentUserFromCookie, verifyGuestOrderToken } from '@/lib/auth/jwt';
@@ -126,7 +127,7 @@ export default async function OrderDetailPage({ params, searchParams }: PageProp
         {isBirthdayOrder && (
           <div className="p-5 bg-gradient-to-r from-[#FFF6F0] via-[#FCE8EC] to-[#FFF6F0] rounded-3xl border border-[#F5D3DC] flex items-center justify-between gap-4 shadow-xs">
             <div className="flex items-center gap-3.5">
-              <span className="text-3xl animate-bounce">🎂</span>
+              <Cake className="w-8 h-8 text-[#8F1237] animate-bounce shrink-0" />
               <div>
                 <h3 className="font-serif font-extrabold text-[#33252A] text-base">
                   Happy Birthday Celebration!

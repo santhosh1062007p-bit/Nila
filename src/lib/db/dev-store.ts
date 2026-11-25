@@ -6,6 +6,8 @@ import {
   INITIAL_DELIVERY_ZONES,
   INITIAL_STORE_SETTINGS,
   INITIAL_COUPONS,
+  INITIAL_DELIVERY_PARTNERS,
+  INITIAL_REVIEWS,
 } from '@/data/initial-data';
 import {
   Address,
@@ -14,6 +16,8 @@ import {
   Category,
   Coupon,
   CustomerLoginRecord,
+  DeliveryPartner,
+  DeliveryLocationUpdate,
   DeliveryZone,
   Order,
   OrderStatus,
@@ -21,6 +25,7 @@ import {
   PaymentStatus,
   PaymentTransactionStatus,
   Product,
+  Review,
   SessionRecord,
   StoreSettings,
   User,
@@ -43,6 +48,8 @@ const ADMIN_USERS_FILE = path.join(DATA_DIR, 'admin-users.json');
 const COUPONS_FILE = path.join(DATA_DIR, 'coupons.json');
 const ZONES_FILE = path.join(DATA_DIR, 'delivery-zones.json');
 const SETTINGS_FILE = path.join(DATA_DIR, 'settings.json');
+const PARTNERS_FILE = path.join(DATA_DIR, 'delivery-partners.json');
+const REVIEWS_FILE = path.join(DATA_DIR, 'reviews.json');
 
 function assertDevFallbackAllowed() {
   if (shouldRequirePostgres()) {
@@ -94,6 +101,8 @@ export interface DevStoreState {
   auditLogs: AuditLogRecord[];
   addresses: Address[];
   customerLogins: CustomerLoginRecord[];
+  deliveryPartners: DeliveryPartner[];
+  reviews: Review[];
 }
 
 const g = globalThis as unknown as { __nilasDevStore?: DevStoreState };
@@ -120,13 +129,21 @@ function initDevStore(): DevStoreState {
     auditLogs: readJson<AuditLogRecord[]>(AUDIT_FILE, []),
     addresses: readJson<Address[]>(ADDRESSES_FILE, []),
     customerLogins: readJson<CustomerLoginRecord[]>(LOGINS_FILE, []),
+    deliveryPartners: readJson<DeliveryPartner[]>(PARTNERS_FILE, INITIAL_DELIVERY_PARTNERS),
+    reviews: readJson<Review[]>(REVIEWS_FILE, INITIAL_REVIEWS),
   };
 
   return g.__nilasDevStore;
 }
 
 export const devStore = {
-  getState: initDevStore,
+  getState: () => {
+    const s = initDevStore();
+    s.products = readJson<Product[]>(PRODUCTS_FILE, INITIAL_PRODUCTS);
+    s.categories = INITIAL_CATEGORIES;
+    s.users = readJson<User[]>(USERS_FILE, []).filter((u) => u.role === 'customer');
+    return s;
+  },
 
   persistProducts(products: Product[]) {
     writeJsonAtomic(PRODUCTS_FILE, products);
@@ -166,6 +183,9 @@ export const devStore = {
   },
   persistSettings(settings: StoreSettings) {
     writeJsonAtomic(SETTINGS_FILE, settings);
+  },
+  persistDeliveryPartners(partners: DeliveryPartner[]) {
+    writeJsonAtomic(PARTNERS_FILE, partners);
   },
 
   recordAudit(entry: Omit<AuditLogRecord, 'id' | 'created_at'>): AuditLogRecord {
@@ -257,5 +277,11 @@ export const devStore = {
       order,
     });
     return order;
+  },
+
+  persistReviews(reviews: Review[]): void {
+    const state = initDevStore();
+    state.reviews = reviews;
+    writeJsonAtomic(REVIEWS_FILE, reviews);
   },
 };

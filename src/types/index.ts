@@ -161,15 +161,45 @@ export type FulfilmentType = 'delivery' | 'pickup';
 
 export type OrderStatus =
   | 'Order Placed'
+  | 'Payment Confirmed'
   | 'Order Confirmed'
+  | 'Order Accepted'
   | 'Baking in Progress'
   | 'Cake Ready'
   | 'Ready for Pickup'
-  | 'Out for Delivery'
-  | 'Delivered'
+  | 'Delivery Partner Assigned'
   | 'Picked Up'
+  | 'Out for Delivery'
+  | 'Arriving Soon'
+  | 'Delivered'
   | 'Cancelled'
   | 'Rejected';
+
+export interface DeliveryPartner {
+  id: string;
+  name: string;
+  phone: string;
+  vehicle_type: 'bike' | 'scooter' | 'van';
+  vehicle_number: string;
+  is_active: boolean;
+  current_lat?: number | null;
+  current_lng?: number | null;
+  last_location_updated_at?: string | null;
+  created_at?: string;
+}
+
+export interface DeliveryLocationUpdate {
+  order_id: string;
+  partner_id: string;
+  lat: number;
+  lng: number;
+  accuracy?: number | null;
+  speed?: number | null;
+  heading?: number | null;
+  timestamp: string;
+  distance_remaining_km?: number | null;
+  eta_minutes?: number | null;
+}
 
 export type PaymentMethod = 'razorpay' | 'cod';
 export type PaymentStatus = 'pending' | 'authorized' | 'paid' | 'failed' | 'refunded';
@@ -226,6 +256,9 @@ export interface Order {
   special_instructions?: string | null;
   rejection_reason?: string | null;
   razorpay_order_id?: string | null;
+  delivery_partner_id?: string | null;
+  delivery_partner?: DeliveryPartner | null;
+  live_delivery_location?: DeliveryLocationUpdate | null;
   items: OrderItem[];
   status_history?: OrderStatusHistoryRecord[];
   created_at: string;
@@ -307,10 +340,11 @@ export interface AdminUserRecord {
 
 export interface Review {
   id: string;
+  order_id?: string;
   product_id: string;
   product_name?: string;
   customer_name: string;
-  rating: number;
+  rating: number; // 1 to 5
   comment: string;
   created_at: string;
 }

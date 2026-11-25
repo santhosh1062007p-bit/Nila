@@ -1,5 +1,5 @@
 // Nila's Treat — Master Initial Data
-import { Category, Product, DeliveryZone, StoreSettings, Coupon, Review } from '@/types';
+import { Category, Product, DeliveryZone, StoreSettings, Coupon, Review, DeliveryPartner } from '@/types';
 
 export const INITIAL_STORE_SETTINGS: StoreSettings = {
   store_name: "Nila's Treat",
@@ -54,7 +54,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     name: 'Vanilla',
     slug: 'vanilla',
     description: 'Classic Madagascar vanilla sponge layered with light, fluffy vanilla cream and white chocolate shavings.',
-    image_url: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&auto=format&fit=crop&q=80',
+    image_url: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800&auto=format&fit=crop&q=80',
     is_eggless_available: true,
     eggless_extra_paise: 20000,
     is_price_market_dependent: false,
@@ -94,7 +94,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     name: 'Pista',
     slug: 'pista',
     description: 'Fragrant pistachio essence sponge layered with roasted Iranian pistachio flakes and whipped cream.',
-    image_url: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&auto=format&fit=crop&q=80',
+    image_url: 'https://images.unsplash.com/photo-1579372786545-d24232daf58c?w=800&auto=format&fit=crop&q=80',
     is_eggless_available: true,
     eggless_extra_paise: 20000,
     is_price_market_dependent: false,
@@ -174,7 +174,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     name: 'Choco Vanilla',
     slug: 'choco-vanilla',
     description: 'The best of both worlds! Alternating layers of rich dark cocoa and smooth aromatic vanilla.',
-    image_url: 'https://images.unsplash.com/photo-1549589237-9e70b6be4da8?w=800&auto=format&fit=crop&q=80',
+    image_url: 'https://images.unsplash.com/photo-1557308536-ee471ef2c390?w=800&auto=format&fit=crop&q=80',
     is_eggless_available: true,
     eggless_extra_paise: 20000,
     is_price_market_dependent: false,
@@ -196,7 +196,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     name: 'Mango',
     slug: 'mango',
     description: 'Sweet, tropical Alphonso mango pulp blended with silky smooth whipped cream and a radiant golden glaze.',
-    image_url: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=80',
+    image_url: 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800&auto=format&fit=crop&q=80',
     is_eggless_available: true,
     eggless_extra_paise: 20000,
     is_price_market_dependent: true,
@@ -216,7 +216,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     name: 'Pineapple',
     slug: 'pineapple',
     description: 'Refreshing and tangy pineapple chunks layered with moist vanilla cake and light whipped cream.',
-    image_url: 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800&auto=format&fit=crop&q=80',
+    image_url: 'https://images.unsplash.com/photo-1535254973040-607b474cb50d?w=800&auto=format&fit=crop&q=80',
     is_eggless_available: true,
     eggless_extra_paise: 20000,
     is_price_market_dependent: true,
@@ -236,7 +236,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     name: 'Jack Fruit',
     slug: 'jack-fruit',
     description: 'Authentic regional delicacy made with organic honeyed jackfruit pulp. A true specialty of Theni hills.',
-    image_url: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=80',
+    image_url: 'https://images.unsplash.com/photo-1508737804141-4c3b688e2546?w=800&auto=format&fit=crop&q=80',
     is_eggless_available: true,
     eggless_extra_paise: 20000,
     is_price_market_dependent: true,
@@ -338,7 +338,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     name: 'Jamun',
     slug: 'jamun',
     description: 'Juicy, warm Gulab Jamuns soaked in cardamom syrup and layered into rich cream and sponge.',
-    image_url: 'https://images.unsplash.com/photo-1534432182912-63863115e106?w=800&auto=format&fit=crop&q=80',
+    image_url: 'https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?w=800&auto=format&fit=crop&q=80',
     is_eggless_available: true,
     eggless_extra_paise: 20000,
     is_price_market_dependent: false,
@@ -378,7 +378,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     name: 'Rasamalai',
     slug: 'rasamalai',
     description: 'Royal Indian dessert cake garnished with spongy saffron cottage-cheese dumplings, sliced almonds and pistachios.',
-    image_url: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=800&auto=format&fit=crop&q=80',
+    image_url: 'https://images.unsplash.com/photo-1514132687615-019f4d9e1c74?w=800&auto=format&fit=crop&q=80',
     is_eggless_available: true,
     eggless_extra_paise: 20000,
     is_price_market_dependent: false,
@@ -458,7 +458,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     name: 'Palkova',
     slug: 'palkova',
     description: 'Traditional Tamil Nadu Srivilliputhur style caramelized milk fudge layered into soft vanilla sponge.',
-    image_url: 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=800&auto=format&fit=crop&q=80',
+    image_url: 'https://images.unsplash.com/photo-1708175313856-8573b2bf8a3a?w=800&auto=format&fit=crop&q=80',
     is_eggless_available: true,
     eggless_extra_paise: 20000,
     is_price_market_dependent: false,
@@ -478,7 +478,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     name: 'Rose Milk Pistachio',
     slug: 'rose-milk-pistachio',
     description: 'Harmonious fusion of sweet damask rose water cream with finely crushed emerald pistachios.',
-    image_url: 'https://images.unsplash.com/photo-1519869325930-281384150729?w=800&auto=format&fit=crop&q=80',
+    image_url: 'https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=800&auto=format&fit=crop&q=80',
     is_eggless_available: true,
     eggless_extra_paise: 20000,
     is_price_market_dependent: false,
@@ -638,7 +638,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     name: 'Vancho Cake',
     slug: 'vancho-cake',
     description: 'Renowned twin sponge delicacy combining vanilla and chocolate layers glazed with dual ganache.',
-    image_url: 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=800&auto=format&fit=crop&q=80',
+    image_url: 'https://images.unsplash.com/photo-1557308536-ee471ef2c390?w=800&auto=format&fit=crop&q=80',
     is_eggless_available: true,
     eggless_extra_paise: 20000,
     is_price_market_dependent: false,
@@ -706,4 +706,38 @@ export const INITIAL_REVIEWS: Review[] = [
     created_at: '2026-10-30T16:00:00Z',
   },
 ];
+
+export const BAKERY_COORDINATES = {
+  name: "Nila's Treat Bakery Kitchen",
+  address: "Madurai Main Road, Near Old Bus Stand, Theni, Tamil Nadu 625531",
+  phone: "9344597833",
+  lat: 10.0104,
+  lng: 77.4768,
+};
+
+export const INITIAL_DELIVERY_PARTNERS: DeliveryPartner[] = [
+  {
+    id: 'dp-1',
+    name: 'Suresh Kumar (Theni Express)',
+    phone: '9842100111',
+    vehicle_type: 'bike',
+    vehicle_number: 'TN 60 AB 1234',
+    is_active: true,
+    current_lat: 10.0104,
+    current_lng: 77.4768,
+    last_location_updated_at: new Date().toISOString(),
+  },
+  {
+    id: 'dp-2',
+    name: 'Muthu Pandi (Bodi Route)',
+    phone: '9842200222',
+    vehicle_type: 'scooter',
+    vehicle_number: 'TN 60 CD 5678',
+    is_active: true,
+    current_lat: 10.0130,
+    current_lng: 77.4790,
+    last_location_updated_at: new Date().toISOString(),
+  },
+];
+
 

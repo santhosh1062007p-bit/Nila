@@ -25,6 +25,7 @@ export default function CartDrawer() {
     isCartOpen,
     setIsCartOpen,
     updateQuantity,
+    updateItemWeight,
     removeItem,
     fulfilmentType,
     setFulfilmentType,
@@ -176,17 +177,39 @@ export default function CartDrawer() {
                         </button>
                       </div>
 
-                      {/* Variant and Eggless Pill */}
-                      <div className="flex items-center gap-2 flex-wrap mt-1">
-                        <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[#FCE8ED] text-[#70132C]">
-                          {item.weight_kg} Kg
-                        </span>
+                      {/* Weight Switcher & Eggless Pill */}
+                      <div className="flex items-center gap-2 flex-wrap mt-1.5">
+                        <div className="inline-flex items-center bg-[#FFF6F0] p-0.5 rounded-lg border border-[#F5D3DC]">
+                          <button
+                            type="button"
+                            onClick={() => updateItemWeight(item.id, 0.5)}
+                            className={`px-2 py-0.5 text-[10px] font-bold rounded transition-colors ${
+                              item.weight_kg === 0.5
+                                ? 'bg-[#8F1237] text-white shadow-xs'
+                                : 'text-[#70132C] hover:bg-[#FCE8ED]'
+                            }`}
+                          >
+                            ½ Kg
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => updateItemWeight(item.id, 1.0)}
+                            className={`px-2 py-0.5 text-[10px] font-bold rounded transition-colors ${
+                              item.weight_kg === 1.0
+                                ? 'bg-[#8F1237] text-white shadow-xs'
+                                : 'text-[#70132C] hover:bg-[#FCE8ED]'
+                            }`}
+                          >
+                            1 Kg
+                          </button>
+                        </div>
+
                         {item.eggless ? (
-                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-300">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-300">
                             Eggless (+₹200)
                           </span>
                         ) : (
-                          <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-stone-100 text-stone-600">
+                          <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-stone-100 text-stone-600">
                             Regular
                           </span>
                         )}

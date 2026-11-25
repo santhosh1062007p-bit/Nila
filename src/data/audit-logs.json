@@ -1,5 +1,318 @@
 [
   {
+    "actor_id": "usr-1795360881656-ad8b9",
+    "actor_role": "customer",
+    "action": "ADDRESS_CREATED",
+    "target_type": "address",
+    "target_id": "addr-1795624801204-cace0",
+    "ip_address": "2409:40f4:205a:d5f7:7cab:f387:b044:99e1",
+    "id": "aud-1795624801214-cc20s",
+    "created_at": "2026-11-25T16:40:01.214Z"
+  },
+  {
+    "actor_id": "usr-1795360881656-ad8b9",
+    "actor_role": "customer",
+    "action": "PROFILE_AVATAR_UPLOADED",
+    "target_type": "user_profile",
+    "target_id": "usr-1795360881656-ad8b9",
+    "ip_address": "2409:40f4:205a:d5f7:7cab:f387:b044:99e1",
+    "metadata": {
+      "format": "jpeg",
+      "size": 90315
+    },
+    "id": "aud-1795624715403-q76ws",
+    "created_at": "2026-11-25T16:38:35.403Z"
+  },
+  {
+    "actor_id": "usr-1795360881656-ad8b9",
+    "actor_role": "customer",
+    "action": "PROFILE_UPDATED",
+    "target_type": "user_profile",
+    "target_id": "usr-1795360881656-ad8b9",
+    "ip_address": "2409:40f4:205a:d5f7:7cab:f387:b044:99e1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795624701322-4hj98",
+    "created_at": "2026-11-25T16:38:21.322Z"
+  },
+  {
+    "actor_id": "usr-1795360881656-ad8b9",
+    "actor_role": "customer",
+    "action": "PROFILE_UPDATED",
+    "target_type": "user_profile",
+    "target_id": "usr-1795360881656-ad8b9",
+    "ip_address": "2409:40f4:205a:d5f7:7cab:f387:b044:99e1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795624605763-p8j0p",
+    "created_at": "2026-11-25T16:36:45.763Z"
+  },
+  {
+    "actor_id": "usr-1795360881656-ad8b9",
+    "actor_role": "customer",
+    "action": "PROFILE_UPDATED",
+    "target_type": "user_profile",
+    "target_id": "usr-1795360881656-ad8b9",
+    "ip_address": "2409:40f4:205a:d5f7:7cab:f387:b044:99e1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795624604461-swjq7",
+    "created_at": "2026-11-25T16:36:44.461Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:205a:d5f7:7cab:f387:b044:99e1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795624363816-ojdvj",
+    "created_at": "2026-11-25T16:32:43.816Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_FAILED",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:205a:d5f7:7cab:f387:b044:99e1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795624341238-yr21b",
+    "created_at": "2026-11-25T16:32:21.238Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_FAILED",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:205a:d5f7:7cab:f387:b044:99e1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795624331103-2qqa1",
+    "created_at": "2026-11-25T16:32:11.103Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_PORTAL_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:205a:d5f7:7cab:f387:b044:99e1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795621576622-iqxsf",
+    "created_at": "2026-11-25T15:46:16.622Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "::1",
+    "user_agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.26100.9818",
+    "id": "aud-1795621139997-chp63",
+    "created_at": "2026-11-25T15:38:59.997Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_FAILED",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:205a:d5f7:7cab:f387:b044:99e1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795617370459-qx5xx",
+    "created_at": "2026-11-25T14:36:10.459Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_FAILED",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:205a:d5f7:7cab:f387:b044:99e1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795617349686-9kouc",
+    "created_at": "2026-11-25T14:35:49.686Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_PORTAL_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "::1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795534268434-fsx7e",
+    "created_at": "2026-11-24T15:31:08.434Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "::1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795534175925-ewai6",
+    "created_at": "2026-11-24T15:29:35.925Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "::1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795502850288-wuufa",
+    "created_at": "2026-11-24T06:47:30.288Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "::1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795502735681-ly2ze",
+    "created_at": "2026-11-24T06:45:35.681Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_FAILED",
+    "target_type": "auth",
+    "ip_address": "::1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795502722695-pdzn7",
+    "created_at": "2026-11-24T06:45:22.695Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "::1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795502667165-sd2w7",
+    "created_at": "2026-11-24T06:44:27.165Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_FAILED",
+    "target_type": "auth",
+    "ip_address": "::1",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795502632248-4wrws",
+    "created_at": "2026-11-24T06:43:52.248Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:204b:4567:8826:221:d2a5:9186",
+    "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.7.5 Mobile/15E148 Safari/604.1",
+    "id": "aud-1795365530951-blq7y",
+    "created_at": "2026-11-22T16:38:50.951Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_FAILED",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:204b:4567:8826:221:d2a5:9186",
+    "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.7.5 Mobile/15E148 Safari/604.1",
+    "id": "aud-1795365510759-34b74",
+    "created_at": "2026-11-22T16:38:30.759Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "103.98.63.239",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "id": "aud-1795363042312-yuxmv",
+    "created_at": "2026-11-22T15:57:22.313Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_FAILED",
+    "target_type": "auth",
+    "ip_address": "103.98.63.239",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "id": "aud-1795362898321-ctz0q",
+    "created_at": "2026-11-22T15:54:58.321Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_FAILED",
+    "target_type": "auth",
+    "ip_address": "103.98.63.239",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "id": "aud-1795362881526-8mk4k",
+    "created_at": "2026-11-22T15:54:41.526Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "103.98.63.239",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "id": "aud-1795362530463-8z0az",
+    "created_at": "2026-11-22T15:48:50.463Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ORDER_ADMIN_UPDATED",
+    "target_type": "order",
+    "target_id": "ord-seed-1",
+    "ip_address": "2409:40f4:2059:5a82:f5ba:ec0:b247:ed22",
+    "metadata": {
+      "status": "Cancelled"
+    },
+    "id": "aud-1795362022234-2ztnu",
+    "created_at": "2026-11-22T15:40:22.234Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ORDER_ADMIN_UPDATED",
+    "target_type": "order",
+    "target_id": "ord-1794040302311",
+    "ip_address": "2409:40f4:2059:5a82:f5ba:ec0:b247:ed22",
+    "metadata": {
+      "status": "Baking in Progress"
+    },
+    "id": "aud-1795362021838-sog5b",
+    "created_at": "2026-11-22T15:40:21.838Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:2059:5a82:f5ba:ec0:b247:ed22",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36 Edg/158.0.0.0",
+    "id": "aud-1795361852248-icvsu",
+    "created_at": "2026-11-22T15:37:32.248Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "2409:40f4:2059:5a82:f5ba:ec0:b247:ed22",
+    "user_agent": "Python-urllib/3.13",
+    "id": "aud-1795360199165-xdo2b",
+    "created_at": "2026-11-22T15:09:59.165Z"
+  },
+  {
+    "actor_id": "usr-admin-1",
+    "actor_role": "admin",
+    "action": "ADMIN_LOGIN_SUCCESS",
+    "target_type": "auth",
+    "ip_address": "::1",
+    "user_agent": "Python-urllib/3.13",
+    "id": "aud-1795358737180-aa6ry",
+    "created_at": "2026-11-22T14:45:37.180Z"
+  },
+  {
     "actor_id": "usr-admin-1",
     "actor_role": "admin",
     "action": "ADMIN_LOGIN_SUCCESS",

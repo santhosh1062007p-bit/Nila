@@ -1,0 +1,23 @@
+[
+  {
+    "label": "Home",
+    "address_type": "Home",
+    "recipient_name": "santhosh",
+    "phone": "9876543211",
+    "alternate_phone": null,
+    "house_no": "125, Indra colony",
+    "street_name": "gandhi nagar",
+    "area_locality": "allinagaram",
+    "address_line1": "125, Indra colony, gandhi nagar",
+    "address_line2": "allinagaram",
+    "city": "Theni",
+    "district": "Theni",
+    "state": "Tamil Nadu",
+    "pincode": "625531",
+    "is_default": true,
+    "id": "addr-1795624801204-cace0",
+    "user_id": "usr-1795360881656-ad8b9",
+    "created_at": "2026-11-25T16:40:01.204Z",
+    "updated_at": "2026-11-25T16:40:01.204Z"
+  }
+]

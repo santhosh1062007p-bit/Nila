@@ -7,7 +7,7 @@
     "role": "customer",
     "is_active": true,
     "created_at": "2026-11-07T07:37:10.992Z",
-    "password": "customer123"
+    "password_hash": "$argon2id$v=19$m=19456,t=2,p=1$41punh7lVbkMOPECLLFXBw$Q+f0Pdv/q7JWn/8+ezzf0yP0dywzypqSTRPUuQwv2MQ"
   },
   {
     "id": "usr-1794037044963",
@@ -30,13 +30,41 @@
     "password": "tamil12"
   },
   {
-    "id": "usr-1795358144721-b9925",
+    "id": "usr-1795360881656-ad8b9",
+    "full_name": "santhosh",
+    "phone": "9876543211",
+    "email": "saravana123@gmail.com",
+    "role": "customer",
+    "is_active": true,
+    "created_at": "2026-11-22T15:21:21.656Z",
+    "password_hash": "$argon2id$v=19$m=19456,t=2,p=1$AHucmorzOwfsyfQDv6vCag$+0Vde/ycmtZQOyBylGHifQ0p5Wcdr06Ht+m6C7+hcsk",
+    "date_of_birth": "2008-07-25",
+    "gender": "male",
+    "notification_preferences": {
+      "order_updates": true,
+      "promotions": false
+    },
+    "updated_at": "2026-11-25T16:38:35.390Z",
+    "avatar_url": "/uploads/avatars/avatar-1795624715379-30810b09.jpg"
+  },
+  {
+    "id": "usr-1795619683620-e64ec",
+    "full_name": "Santhosh Test",
+    "phone": "9840012345",
+    "email": null,
+    "role": "customer",
+    "is_active": true,
+    "created_at": "2026-11-25T15:14:43.621Z",
+    "password_hash": "$argon2id$v=19$m=19456,t=2,p=1$UW45sPlQvPMmM5+tcPorsg$PxtLfj6kp2ujfgHtX8AbZ97p4HLeWswMkIG1VUmhFZ4"
+  },
+  {
+    "id": "usr-1795619694023-2df03",
     "full_name": "santhosh",
     "phone": "1234567890",
     "email": null,
     "role": "customer",
     "is_active": true,
-    "created_at": "2026-11-22T14:35:44.721Z",
-    "password_hash": "$argon2id$v=19$m=19456,t=2,p=1$wT/M0VxsLYwlMo0U1okZmg$jnt+B8v293D2gbXF/CRpCI4hUmJCH0XAizwXjAGA7SA"
+    "created_at": "2026-11-25T15:14:54.024Z",
+    "password_hash": "$argon2id$v=19$m=19456,t=2,p=1$wBXhgkyXLRHZwaLe+pj1uw$tZZ8MDWCXqWRcP0QjOFvKBJR42ZQUX/bHrjOoSlpknA"
   }
 ]

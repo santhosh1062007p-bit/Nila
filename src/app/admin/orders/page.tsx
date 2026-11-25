@@ -8,8 +8,11 @@ import {
   RefreshCw,
   BellRing,
   X,
+  Bike,
+  Navigation,
+  ExternalLink,
 } from 'lucide-react';
-import { Order, OrderStatus, PaymentStatus } from '@/types';
+import { Order, OrderStatus, PaymentStatus, DeliveryPartner } from '@/types';
 import { formatINR } from '@/lib/utils';
 import { useToast } from '@/context/ToastContext';
 import { useRealtimeSubscription } from '@/context/RealtimeContext';
@@ -45,8 +48,43 @@ export default function AdminOrdersPage() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [deliveryPartners, setDeliveryPartners] = useState<DeliveryPartner[]>([]);
   const [lastRefreshed, setLastRefreshed] = useState<Date>(new Date());
   const [newOrderAlert, setNewOrderAlert] = useState<string | null>(null);
+
+  const fetchPartners = useCallback(async () => {
+    try {
+      const res = await fetch('/api/delivery/partners');
+      if (res.ok) {
+        const data = await res.json();
+        setDeliveryPartners(data.partners || []);
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const handleAssignPartner = async (orderId: string, partnerId: string) => {
+    try {
+      const res = await fetch('/api/delivery/assign', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ order_id: orderId, partner_id: partnerId }),
+      });
+      const data = await res.json();
+      if (res.ok && data.order) {
+        showToast(data.message || 'Delivery assigned successfully', 'success');
+        setOrders((prev) => prev.map((o) => (o.id === orderId ? data.order : o)));
+        if (selectedOrder && selectedOrder.id === orderId) {
+          setSelectedOrder(data.order);
+        }
+      } else {
+        showToast(data.message || 'Failed to assign delivery', 'error');
+      }
+    } catch {
+      showToast('Network error assigning partner', 'error');
+    }
+  };
 
   const prevOrderCountRef = useRef<number | null>(null);
 
@@ -67,7 +105,7 @@ export default function AdminOrdersPage() {
             const newest = fetchedOrders[0];
             playNotificationChime();
             setNewOrderAlert(
-              `🔔 New Order Received: #${newest.order_code} from ${newest.customer_name} (${formatINR(newest.total_paise)})`
+              `New Order Received: #${newest.order_code} from ${newest.customer_name} (${formatINR(newest.total_paise)})`
             );
             showToast(`New order #${newest.order_code} received!`, 'success');
           }
@@ -98,6 +136,7 @@ export default function AdminOrdersPage() {
         if (active) setLastRefreshed(new Date());
       });
 
+    fetchPartners();
     const interval = setInterval(() => loadOrders(true), 5000);
     return () => {
       active = false;
@@ -114,7 +153,7 @@ export default function AdminOrdersPage() {
         if (newOrder && newOrder.id) {
           playNotificationChime();
           setNewOrderAlert(
-            `🔔 Instant New Order: #${newOrder.order_code} from ${newOrder.customer_name} (${formatINR(newOrder.total_paise)})`
+            `Instant New Order: #${newOrder.order_code} from ${newOrder.customer_name} (${formatINR(newOrder.total_paise)})`
           );
           showToast(`New order #${newOrder.order_code} received instantly!`, 'success');
           setOrders((prev) => {
@@ -368,7 +407,7 @@ export default function AdminOrdersPage() {
                       <th className="py-3.5 px-4">Items Ordered</th>
                       <th className="py-3.5 px-4">Total Amount</th>
                       <th className="py-3.5 px-4">Payment</th>
-                      <th className="py-3.5 px-4">Live Status</th>
+                      <th className="py-3.5 px-4">Status &amp; Rider</th>
                       <th className="py-3.5 px-4 text-right">Details</th>
                     </tr>
                   </thead>
@@ -399,8 +438,8 @@ export default function AdminOrdersPage() {
                           </span>
                           <span className="block text-[10px] text-[#70132C]/70 capitalize">
                             {order.fulfilment_type === 'delivery'
-                              ? `🚚 Delivery (${order.delivery_pincode || 'Theni'})`
-                              : '🏬 Shop Pickup'}
+                              ? `Delivery (${order.delivery_pincode || 'Theni'})`
+                              : 'Shop Pickup'}
                           </span>
                         </td>
 
@@ -451,25 +490,45 @@ export default function AdminOrdersPage() {
                           </button>
                         </td>
 
-                        {/* Status Select */}
-                        <td className="py-3.5 px-4">
+                        {/* Status Select & Delivery Partner */}
+                        <td className="py-3.5 px-4 space-y-1.5 min-w-[190px]">
                           <select
                             value={order.order_status}
                             onChange={(e) =>
                               handleUpdateStatus(order.id, e.target.value as OrderStatus)
                             }
-                            className="bg-[#FFFDFB] text-xs font-bold text-[#8F1237] border border-[#F5D3DC] rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-[#8F1237]"
+                            className="w-full bg-[#FFFDFB] text-xs font-bold text-[#8F1237] border border-[#F5D3DC] rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-[#8F1237]"
                           >
                             <option value="Order Placed">Order Placed</option>
-                            <option value="Order Confirmed">Order Confirmed</option>
+                            <option value="Payment Confirmed">Payment Confirmed</option>
+                            <option value="Order Accepted">Order Accepted</option>
                             <option value="Baking in Progress">Baking in Progress</option>
                             <option value="Cake Ready">Cake Ready</option>
                             <option value="Ready for Pickup">Ready for Pickup</option>
-                            <option value="Out for Delivery">Out for Delivery</option>
-                            <option value="Delivered">Delivered</option>
+                            <option value="Delivery Partner Assigned">Delivery Partner Assigned</option>
                             <option value="Picked Up">Picked Up</option>
+                            <option value="Out for Delivery">Out for Delivery</option>
+                            <option value="Arriving Soon">Arriving Soon</option>
+                            <option value="Delivered">Delivered</option>
                             <option value="Cancelled">Cancelled</option>
                           </select>
+
+                          {order.fulfilment_type === 'delivery' && (
+                            <div className="flex items-center gap-1">
+                              <select
+                                value={order.delivery_partner_id || ''}
+                                onChange={(e) => handleAssignPartner(order.id, e.target.value)}
+                                className="text-[11px] font-semibold text-gray-800 bg-rose-50 border border-rose-200 rounded-lg px-2 py-1 w-full"
+                              >
+                                <option value="">Assign Rider...</option>
+                                {deliveryPartners.map((dp) => (
+                                  <option key={dp.id} value={dp.id}>
+                                    {dp.name} ({dp.vehicle_number})
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          )}
                         </td>
 
                         {/* View Button */}
@@ -509,8 +568,8 @@ export default function AdminOrdersPage() {
                       <p className="font-bold text-[#70132C]">{order.customer_name} • {order.customer_phone}</p>
                       <p className="text-[11px] text-[#8C485A]">
                         {order.fulfilment_type === 'delivery'
-                          ? `🚚 Delivery to ${order.delivery_pincode || 'Theni'}`
-                          : '🏬 Shop Pickup'}
+                          ? `Delivery to ${order.delivery_pincode || 'Theni'}`
+                          : 'Shop Pickup'}
                       </p>
                       <div className="pt-1 border-t border-[#F5D3DC]/60 text-[11px] text-[#33252A]">
                         {order.items?.map((item, idx) => (
@@ -521,29 +580,51 @@ export default function AdminOrdersPage() {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between gap-2 pt-1">
-                      <select
-                        value={order.order_status}
-                        onChange={(e) =>
-                          handleUpdateStatus(order.id, e.target.value as OrderStatus)
-                        }
-                        className="flex-1 bg-[#FFFDFB] text-xs font-bold text-[#8F1237] border border-[#F5D3DC] rounded-lg px-2.5 py-1.5 focus:outline-none"
-                      >
-                        <option value="Order Placed">Order Placed</option>
-                        <option value="Order Confirmed">Order Confirmed</option>
-                        <option value="Baking in Progress">Baking in Progress</option>
-                        <option value="Cake Ready">Cake Ready</option>
-                        <option value="Ready for Pickup">Ready for Pickup</option>
-                        <option value="Out for Delivery">Out for Delivery</option>
-                        <option value="Delivered">Delivered</option>
-                      </select>
+                    <div className="space-y-2 pt-1">
+                      <div className="flex items-center justify-between gap-2">
+                        <select
+                          value={order.order_status}
+                          onChange={(e) =>
+                            handleUpdateStatus(order.id, e.target.value as OrderStatus)
+                          }
+                          className="flex-1 bg-[#FFFDFB] text-xs font-bold text-[#8F1237] border border-[#F5D3DC] rounded-lg px-2.5 py-1.5 focus:outline-none"
+                        >
+                          <option value="Order Placed">Order Placed</option>
+                          <option value="Payment Confirmed">Payment Confirmed</option>
+                          <option value="Order Accepted">Order Accepted</option>
+                          <option value="Baking in Progress">Baking in Progress</option>
+                          <option value="Cake Ready">Cake Ready</option>
+                          <option value="Ready for Pickup">Ready for Pickup</option>
+                          <option value="Delivery Partner Assigned">Delivery Partner Assigned</option>
+                          <option value="Picked Up">Picked Up</option>
+                          <option value="Out for Delivery">Out for Delivery</option>
+                          <option value="Arriving Soon">Arriving Soon</option>
+                          <option value="Delivered">Delivered</option>
+                          <option value="Cancelled">Cancelled</option>
+                        </select>
 
-                      <button
-                        onClick={() => setSelectedOrder(order)}
-                        className="px-3.5 py-1.5 bg-[#8F1237] text-white rounded-lg font-bold text-xs"
-                      >
-                        Details
-                      </button>
+                        <button
+                          onClick={() => setSelectedOrder(order)}
+                          className="px-3.5 py-1.5 bg-[#8F1237] text-white rounded-lg font-bold text-xs shrink-0"
+                        >
+                          Details
+                        </button>
+                      </div>
+
+                      {order.fulfilment_type === 'delivery' && (
+                        <select
+                          value={order.delivery_partner_id || ''}
+                          onChange={(e) => handleAssignPartner(order.id, e.target.value)}
+                          className="w-full text-[11px] font-semibold text-gray-800 bg-rose-50 border border-rose-200 rounded-lg px-2 py-1.5"
+                        >
+                          <option value="">Assign Delivery Rider...</option>
+                          {deliveryPartners.map((dp) => (
+                            <option key={dp.id} value={dp.id}>
+                              {dp.name} ({dp.vehicle_number})
+                            </option>
+                          ))}
+                        </select>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -602,6 +683,42 @@ export default function AdminOrdersPage() {
                 </div>
               )}
 
+              {/* Delivery Partner Assignment in Modal */}
+              {selectedOrder.fulfilment_type === 'delivery' && (
+                <div className="text-xs bg-rose-50/80 p-4 rounded-2xl border border-rose-100 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-[#8C485A] block uppercase text-[10px]">
+                      Assigned Delivery Rider
+                    </span>
+                    <a
+                      href={`/orders/${selectedOrder.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] font-bold text-[#8F1237] hover:underline"
+                    >
+                      <Navigation className="w-3 h-3" />
+                      View Live GPS Route
+                      <ExternalLink className="w-2.5 h-2.5" />
+                    </a>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <select
+                      value={selectedOrder.delivery_partner_id || ''}
+                      onChange={(e) => handleAssignPartner(selectedOrder.id, e.target.value)}
+                      className="flex-1 bg-white border border-rose-200 rounded-xl px-3 py-2 text-xs font-bold text-gray-900"
+                    >
+                      <option value="">Select Delivery Rider...</option>
+                      {deliveryPartners.map((dp) => (
+                        <option key={dp.id} value={dp.id}>
+                          {dp.name} — {dp.vehicle_number} ({dp.phone})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              )}
+
               {/* Ordered Items */}
               <div className="space-y-3">
                 <span className="font-bold text-xs uppercase text-[#8C485A]">Ordered Cakes</span>
@@ -611,7 +728,7 @@ export default function AdminOrdersPage() {
                       <div>
                         <p className="font-bold text-[#70132C]">{it.quantity}x {it.product_name}</p>
                         <p className="text-[11px] text-[#8C485A]">
-                          Size: <strong>{it.weight_kg} Kg</strong> • {it.eggless ? '🥚 100% Eggless (+₹200)' : 'Standard'}
+                          Size: <strong>{it.weight_kg} Kg</strong> • {it.eggless ? '100% Eggless (+₹200)' : 'Standard'}
                         </p>
                         {it.custom_message && (
                           <p className="text-[11px] text-amber-800 italic mt-0.5">

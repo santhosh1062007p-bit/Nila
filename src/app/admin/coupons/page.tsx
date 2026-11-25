@@ -321,7 +321,7 @@ export default function AdminCouponsPage() {
                 {/* Who Gets This Coupon? (Target Audience Selection) */}
                 <div className="pt-2 border-t border-[#F5D3DC] space-y-2">
                   <label className="block font-bold text-[#70132C] text-sm">
-                    🎯 Who is Allowed to Use this Coupon?
+                    Target Audience (Eligible Customers)
                   </label>
 
                   <div className="space-y-2">

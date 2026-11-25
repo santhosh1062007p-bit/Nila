@@ -12,6 +12,7 @@ import {
   LogOut,
   ExternalLink,
   Users,
+  Bike,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useRealtime } from '@/context/RealtimeContext';
@@ -27,6 +28,7 @@ export default function AdminNav() {
     { href: '/admin/products', label: 'Cakes & Pricing', icon: Cake },
     { href: '/admin/dashboard', label: 'Analytics', icon: BarChart3 },
     { href: '/admin/delivery', label: 'Delivery Zones', icon: MapPin },
+    { href: '/delivery', label: 'Rider Portal', icon: Bike },
     { href: '/admin/coupons', label: 'Coupons', icon: Tag },
   ];
 

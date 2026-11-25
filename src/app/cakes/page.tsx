@@ -7,6 +7,7 @@ import ProductFilters from '@/components/products/ProductFilters';
 import { Product, Category } from '@/types';
 import { INITIAL_PRODUCTS, INITIAL_CATEGORIES } from '@/data/initial-data';
 import { useRealtimeSubscription } from '@/context/RealtimeContext';
+import BrandLoadingScreen from '@/components/ui/BrandLoadingScreen';
 
 function CakesCatalogContent() {
   const searchParams = useSearchParams();
@@ -18,6 +19,8 @@ function CakesCatalogContent() {
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [searchQuery, setSearchQuery] = useState<string>(initialSearch);
   const [egglessOnly, setEgglessOnly] = useState<boolean>(false);
+  const [quickFilter, setQuickFilter] = useState<string>('all');
+  const [sortBy, setSortBy] = useState<string>('featured');
 
   // Sync with searchParams
   useEffect(() => {
@@ -130,20 +133,57 @@ function CakesCatalogContent() {
       result = result.filter((p) => p.is_eggless_available);
     }
 
+    // Swiggy/Zomato Quick Filters
+    if (quickFilter === 'bestsellers') {
+      result = result.filter((p) => p.is_bestseller);
+    } else if (quickFilter === 'under500') {
+      result = result.filter((p) => p.variants?.some((v) => v.price_paise <= 50000));
+    } else if (quickFilter === 'fruit') {
+      result = result.filter(
+        (p) =>
+          p.category_slug === 'fruit-flavours' ||
+          p.category_name?.toLowerCase().includes('fruit')
+      );
+    }
+
+    const getMinPrice = (p: Product) =>
+      p.variants && p.variants.length > 0
+        ? Math.min(...p.variants.map((v) => v.price_paise))
+        : 0;
+
+    // Swiggy/Zomato Sorting
+    if (sortBy === 'price-low') {
+      result.sort((a, b) => getMinPrice(a) - getMinPrice(b));
+    } else if (sortBy === 'price-high') {
+      result.sort((a, b) => getMinPrice(b) - getMinPrice(a));
+    } else if (sortBy === 'rating') {
+      result.sort((a, b) => {
+        if (b.is_bestseller !== a.is_bestseller) {
+          return (b.is_bestseller ? 1 : 0) - (a.is_bestseller ? 1 : 0);
+        }
+        return (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0);
+      });
+    }
+
     return result;
-  }, [products, selectedCategory, searchQuery, egglessOnly]);
+  }, [products, selectedCategory, searchQuery, egglessOnly, quickFilter, sortBy]);
 
   return (
     <div className="py-6 sm:py-8 bg-[#FFFDFB] w-full">
       <div className="w-full px-3 sm:px-5 md:px-6 lg:px-8 xl:px-10 2xl:px-12 space-y-6">
         
-        {/* Simple Category Chips & Eggless Toggle */}
+        {/* Swiggy/Zomato Discovery Filters & Sorter */}
         <ProductFilters
           categories={categories}
           selectedCategory={selectedCategory}
           onSelectCategory={setSelectedCategory}
           egglessOnly={egglessOnly}
           onToggleEgglessOnly={setEgglessOnly}
+          quickFilter={quickFilter}
+          onSelectQuickFilter={setQuickFilter}
+          sortBy={sortBy}
+          onSelectSortBy={setSortBy}
+          totalCount={products.length}
         />
 
         {/* Search Results Notice (if searching) */}
@@ -194,7 +234,7 @@ function CakesCatalogContent() {
 
 export default function CakesPage() {
   return (
-    <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center text-xs text-[#8F1237]">Loading Cakes...</div>}>
+    <Suspense fallback={<BrandLoadingScreen fullScreen={false} />}>
       <CakesCatalogContent />
     </Suspense>
   );
